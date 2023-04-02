@@ -1,12 +1,8 @@
 public class ClientFaultException extends RuntimeException {
-    private String possible_cause;
-    private String location;
+    public ClientFaultException() {
+    }
 
-    private String msg;
-
-    public ClientFaultException(String possible_cause, String location, String msg) {
-        this.possible_cause = possible_cause;
-        this.location = location;
-        this.msg = msg;
+    public ClientFaultException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

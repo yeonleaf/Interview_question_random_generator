@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NotDirectoryException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -14,8 +15,8 @@ import static java.lang.System.exit;
 public class Main {
 
     private static Scanner sc = new Scanner(System.in);
-    private static final String DEFAULT_PATH = "C:\\Users\\조주연\\Desktop\\irg\\src\\txt\\";
-    private static final String DIRECTORY_PATH = "C:\\Users\\조주연\\Desktop\\irg\\src\\txt";
+    private static final String DEFAULT_PATH = "..\\txt\\";
+    private static final String DIRECTORY_PATH = "..\\txt";
 
     private static final Path names_path = Paths.get(DEFAULT_PATH + "names.txt");
 
@@ -130,27 +131,7 @@ public class Main {
             writer.flush();
             writer.close();
         }
-
-        //
-        /*
-        * names에서 파일 목록을 가져온다.
-        * 파일 목록을 인덱스 번호와 함께 리스트 형태로 보여준다.
-        * while
-        * fileIdx 어떤 파일에 질문을 추가할 것인지 입력받기
-        * fileIdx를 제대로 받은 경우 (인덱스 범위 내에 있어야 함)
-        *   파일이 있는지 확인한다.
-        *       해당 파일이 없으면 경고문을 띄운 뒤 파일을 새로 생성한 후 break.
-        *
-        * 질문을 입력해주세요. 질문을 더 이상 입력하고 싶지 않다면 -1을 입력해주세요.
-        * writer 열기
-        * while
-        *   String q = sc.next() == "-1" -> 질문 입력을 종료합니다. return;
-        *   질문을 파일에 쓰기
-        * writer 닫기
-        * */
     }
-
-    // 카테고리 리스트와 파일명이 일치하는지 확인하는 함수
 
     private static boolean compare_names(List<String> a, List<String> b) {
         if (a.size() != b.size()) return false;
@@ -168,10 +149,10 @@ public class Main {
         Path possible_default_path = Paths.get(DEFAULT_PATH);
         Path names_path = Paths.get(DEFAULT_PATH + "names.txt");
         if (!Files.isDirectory(possible_directory)) {
-            throw new ClientFaultException("INVALID PATH", "DIRECTORY_PATH", "It is not directory path or must be spelling error");
+            throw new ClientFaultException("INVALID PATH - DIRECTORY PATH", new NotDirectoryException(possible_directory.toString()));
         }
         if (!Files.isDirectory(possible_default_path)) {
-            throw new ClientFaultException("INVALID PATH", "DEFAULT_PATH", "It is not directory path or must be spelling error");
+            throw new ClientFaultException("INVALID PATH - DEFAULT PATH", new NotDirectoryException(possible_default_path.toString()));
         }
         if (Files.notExists(names_path)) {
             System.out.println("names.txt 파일이 없습니다. 파일을 새로 생성합니다.");
@@ -281,9 +262,9 @@ public class Main {
         }
 
         List<Integer> idx_list = IntStream.range(0, data.size()).boxed().collect(Collectors.toList());
-        Collections.shuffle(idx_list);
 
         while (true) {
+            Collections.shuffle(idx_list);
             test(data, idx_list, limit);
             System.out.println("테스트를 성공적으로 종료했습니다.");
             System.out.println("이 파일에서 같은 설정으로 테스트를 한 번 더 보려면 1을, 이대로 테스트 모드를 종료하려면 -1을 입력해주세요.");
@@ -294,28 +275,39 @@ public class Main {
         System.out.println("테스트 모드를 종료합니다.");
     }
 
-    public static void main(String[] args) {
-//        try {
-//            cmd_new_category();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            exit(0);
-//        }
+    public static void main(String[] args) throws IOException {
 
-        /*
-        *         try {
-            cmd_new_question();
-        } catch (IOException e) {
-            e.printStackTrace();
-            exit(0);
-        }
-        *
-        * */
+        System.out.println("##============Interview Question Random Generator!============##");
 
         try {
+            can_start();
             check_integrity();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (ClientFaultException cfe) {
+            cfe.printStackTrace();
+            System.out.println("path를 수정한 후 다시 어플리케이션을 실행해 주세요.");
+            exit(0);
         }
+
+        System.out.println("다음의 모드 중 하나를 선택해주세요.");
+        int fn;
+        while (true) {
+            System.out.println("1. 카테고리 추가 모드");
+            System.out.println("2. 새로운 질문 추가 모드");
+            System.out.println("3. 테스트 모드");
+            fn = scan_int_order();
+            if (fn != 1 && fn != 2 && fn != 3) {
+                System.out.println("잘못된 명령어입니다. 다시 선택해주세요.");
+            } else break;
+        }
+
+        if (fn == 1) {
+            cmd_new_category();
+        } else if (fn == 2) {
+            cmd_new_question();
+        } else {
+            test_mode();
+        }
+
+        System.out.println("##============어플리케이션을 종료합니다.============##");
     }
 }
