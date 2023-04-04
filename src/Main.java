@@ -15,10 +15,12 @@ import static java.lang.System.exit;
 public class Main {
 
     private static Scanner sc = new Scanner(System.in);
-    private static final String DEFAULT_PATH = "..\\txt\\";
-    private static final String DIRECTORY_PATH = "..\\txt";
+    private static final String DIRECTORY_RELATIVE_PATH = ".\\src\\txt";
 
-    private static final Path names_path = Paths.get(DEFAULT_PATH + "names.txt");
+    private static String DEFAULT_PATH;
+    private static String DIRECTORY_PATH;
+
+    private static Path names_path;
 
 
     private static List<String> borrow_data(String name) throws IOException {
@@ -78,7 +80,7 @@ public class Main {
         int fn;
         String fileNum;
         while (true) {
-            fileNum = sc.nextLine();
+            fileNum = sc.next();
             try {
                 fn = Integer.parseInt(fileNum);
                 if (0 <= fn && fn <= names.size()-1) {
@@ -144,10 +146,16 @@ public class Main {
         return true;
     }
 
+    private static void set_paths() throws IOException {
+        DIRECTORY_PATH = new File(DIRECTORY_RELATIVE_PATH).getCanonicalPath();
+        DEFAULT_PATH = DIRECTORY_PATH + "\\";
+        names_path = Paths.get(DEFAULT_PATH + "names.txt");
+    }
+
     private static void can_start() throws ClientFaultException, IOException {
+        set_paths();
         Path possible_directory = Paths.get(DIRECTORY_PATH);
         Path possible_default_path = Paths.get(DEFAULT_PATH);
-        Path names_path = Paths.get(DEFAULT_PATH + "names.txt");
         if (!Files.isDirectory(possible_directory)) {
             throw new ClientFaultException("INVALID PATH - DIRECTORY PATH", new NotDirectoryException(possible_directory.toString()));
         }
