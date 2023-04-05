@@ -1,21 +1,99 @@
-stream api
-다형성
-record
-collections
+﻿로컬변수 vs 인스턴스변수 vs 정적(static) 변수
+java vs c++
+java의 장단점
+접근제어자
+접근제어자가 아닌 제어자
+제어자를 조합해서 사용할 때 유의할 점
+오버로딩 vs 오버라이딩
+컬렉션이란?
+컬렉션 프레임워크란?
+List, Set, Map의 특징
+ArrayList의 특징
+LinkedList의 특징
+Stack/Queue의 특징
+HashSet의 특징
+TreeSet의 특징
+HashMap의 특징
+해싱이란?
+TreeMap의 특징
+자바 컴파일 과정
+자바 실행 과정
+jvm이란?
+jvm의 메모리 구조
+jvm의 runtime data area에서 not thread-safe한 영역
+jvm의 runtime data area에서 thread-safe한 영역
+jvm의 execution engine
+garbage collector?
+heap의 메모리 구조
+minor gc / major gc 과정 설명
+garbage collector의 종류
+cms gc
+g1 gc
+z gc
+primitive type의 할당되는 메모리 크기, 기본값, 데이터의 표현 범위
+reference type의 특징
+call by value?
+call by reference?
+java는 call by value인가요 call by reference인가요?
+wrapper class?
+wrapper class 사용의 문제점?
+wrapper class 사용은 언제?
+오토 박싱?
+오토 언박싱?
+오브젝트 클래스의 특징
+오브젝트 클래스에서 자주 사용되는 메서드와 그 특징
+프로세스?
+쓰레드?
+멀티태스킹?
+멀티쓰레딩?
+싱글쓰레드와 멀티쓰레드 비교
+자바 쓰레드 라이프사이클 / 실행제어 메서드
+자바 쓰레드 그룹
+자바 쓰레드 priority
+데몬 쓰레드란?
+쓰레드 동기화?
 synchronized
-call by value
-call by reference
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-remain
-ot
-
+Lock
+Reentrancy
+Structured Lock과 Reentrant Rock을 비교
+Condition
+Volatile
+fork & join 프레임워크
+stream api?
+스트림 성질
+collection과 stream 비교
+스트림 연산의 종류
+스트림 연산의 특징
+기본형 스트림
+기본형 스트림과 일반 스트림의 차이
+스트림 중간연산 종류
+스트림 최종연산 종류
+직렬화?
+데이터 스트림?
+객체?
+객체를 저장한다?
+객체를 데이터 스트림으로 만들어야 하는 이유?
+직렬화가 가능한 대상
+ObjectInputStream / ObjectOutputStream
+직렬화를 java에서 사용하는 상황
+직렬화를 지양하는 상황
+string은 어떤 영역에 저장됨?
+리터럴을 사용해서 스트링을 생성하는 경우와 new 키워드를 사용해서 생성할 때의 차이점
+intern()
+Record?
+불변 데이터 객체?
+컴팩트 생성자?
+일반 클래스와 Record의 공통점, 차이점
+상속?
+인터페이스 상속?
+구현상속?
+구현상속은 언제 사용하는가?
+구현상속의 단점
+컴포지션?
+구현상속을 해야 하는 경우인지 컴포지션을 해야 하는 경우인지 어떻게 구분?
+기본형 형변환의 특징
+참조형 형변환의 특징
+프로그램 오류의 종류
+checked exception과 unchecked exception의 차이
+예외 되던지기?
+연결된 예외, 왜 사용하는지
