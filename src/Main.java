@@ -245,9 +245,9 @@ public class Main {
         }
     }
 
-    private static void test_mode() throws IOException {
+    private static void test_mode_each() throws IOException {
 
-        System.out.println("테스트 모드를 시작합니다.");
+        System.out.println("개별 파일 테스트 모드를 시작합니다.");
         List<String> names_list = borrow_data("names");
         if (names_list.isEmpty()) {
             System.out.println("카테고리가 하나도 없습니다. 카테고리 추가 모드로 들어가서 새로운 카테고리를 추가하세요.");
@@ -261,6 +261,38 @@ public class Main {
             System.out.println("선택한 파일에 질문이 하나도 없습니다. 질문 등록 모드로 들어가서 새로운 질문을 추가하세요.");
             return;
         }
+        test_mode(data);
+        System.out.println("개별 파일 테스트 모드를 종료합니다.");
+    }
+
+    private static void test_mode_sum() throws IOException {
+        List<String> names_list = borrow_data("names");
+        if (names_list.isEmpty()) {
+            System.out.println("카테고리가 하나도 없습니다. 카테고리 추가 모드로 들어가서 새로운 카테고리를 추가하세요.");
+            return;
+        }
+        System.out.println("전체 파일 테스트 모드를 시작합니다.");
+
+        List<String> data = new ArrayList<>();
+        names_list.forEach(s -> {
+            try {
+                data.addAll(borrow_data(s));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        if (data.isEmpty()) {
+            System.out.println("질문이 하나도 없어 테스트를 진행할 수 없습니다. 질문 등록 모드로 들어가서 새로운 질문을 추가하세요.");
+            return;
+        }
+
+        test_mode(data);
+        System.out.println("전체 파일 테스트 모드를 종료합니다.");
+    }
+
+    private static void test_mode(List<String> data) {
+        List<Integer> idx_list = IntStream.range(0, data.size()).boxed().collect(Collectors.toList());
 
         System.out.println("문제를 몇 개 뽑을까요?");
         System.out.println("테스트 모드를 강제 종료하고 싶다면 -1을 입력해주세요");
@@ -269,18 +301,14 @@ public class Main {
             System.out.println("테스트 모드를 종료하고 메인으로 돌아갑니다.");
         }
 
-        List<Integer> idx_list = IntStream.range(0, data.size()).boxed().collect(Collectors.toList());
-
         while (true) {
             Collections.shuffle(idx_list);
             test(data, idx_list, limit);
             System.out.println("테스트를 성공적으로 종료했습니다.");
-            System.out.println("이 파일에서 같은 설정으로 테스트를 한 번 더 보려면 1을, 이대로 테스트 모드를 종료하려면 -1을 입력해주세요.");
+            System.out.println("같은 설정으로 테스트를 한 번 더 보려면 1을, 이대로 테스트 모드를 종료하려면 -1을 입력해주세요.");
             int order = scan_int_order();
             if (order == -1) break;
         }
-
-        System.out.println("테스트 모드를 종료합니다.");
     }
 
     public static void main(String[] args) throws IOException {
@@ -301,9 +329,10 @@ public class Main {
         while (true) {
             System.out.println("1. 카테고리 추가 모드");
             System.out.println("2. 새로운 질문 추가 모드");
-            System.out.println("3. 테스트 모드");
+            System.out.println("3. 개별 파일 테스트 모드");
+            System.out.println("4. 전체 파일 테스트 모드");
             fn = scan_int_order();
-            if (fn != 1 && fn != 2 && fn != 3) {
+            if (fn != 1 && fn != 2 && fn != 3 && fn != 4) {
                 System.out.println("잘못된 명령어입니다. 다시 선택해주세요.");
             } else break;
         }
@@ -312,8 +341,10 @@ public class Main {
             cmd_new_category();
         } else if (fn == 2) {
             cmd_new_question();
+        } else if (fn == 3) {
+            test_mode_each();
         } else {
-            test_mode();
+            test_mode_sum();
         }
 
         System.out.println("##============어플리케이션을 종료합니다.============##");
