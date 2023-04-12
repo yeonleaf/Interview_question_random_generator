@@ -1,0 +1,15 @@
+
+jpa란?
+hibernate란?
+영속성 컨텍스트란?
+영속성 컨텍스트의 속성
+jpa fetchtype (eager / lazy)에 대해 설명하고 각각 어떨 때 사용하는지 설명
+n+1문제와 해결방법
+manyToOne 쓴 이유는? 반대쪽에서 oneToMany 쓸 수도 있지 않나요?
+jpa를 사용하는 이유? 장점?
+jpa 사용할 때와 직접 sql 사용할 때의 차이점
+jpa 사용하면서 불편한 점? 단점?
+jpa에서 pk는 어떻게 설정?
+@Transactional 동작 과정
+jpa 사용하면서 발생했던 문제 있는지?
+open session in view

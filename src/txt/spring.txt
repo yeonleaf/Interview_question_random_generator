@@ -1,0 +1,42 @@
+﻿spring framework의 특징(=장점)
+Spring framework와 spring boot의 차이점
+spring DI?
+spring IOC?
+spring component, service, controller, repository 어노테이션의 차이
+spring controller와 restcontroller의 차이점과 응답
+ioc 컨트롤러 구현
+스프링 빈
+spring 빈 등록 방법
+spring 빈 라이프사이클
+spring mvc란?
+spring mvc의 구조
+spring mvc에서 요청이 들어왔을 때부터 응답이 나갈 때까지 과정을 설명
+spring controlleradvice?
+spring field 주입과 생성자 주입, setter 주입의 차이
+spring 싱글톤 패턴
+java에서 싱글톤 패턴을 구현할 때 문제점
+싱글톤 패턴을 사용할 때 주의해야 할 점
+spring 스코프 프로토타입 빈? 사용하는 이유?
+spring 프로토타입 빈과 싱글톤 빈을 같이 사용할 때 발생하는 문제점과 해결 방안
+spring interceptor와 servlet filter의 차이
+spring @RequestBody, @RequestParam, @PathVariable, @ModelAttribute의 차이
+spring에서 Model이란?
+spring 검증 순서
+spring 애노테이션 기반 검증
+spring BindingResult
+AOP?
+spring aop는 어떤 디자인 패턴과 관련이 있는지?
+spring 동적 프록시 설명, aop에 사용되는 동적 프록시의 종류
+spring proxyfactory
+spring 빈 후처리기
+spring @Aspect
+POJO란?
+Lombok?
+Lombok이 만드는 메소드들이 생성되는 시점은?
+서블릿에 대해 설명해주세요.
+VO, BO, DAO, DTO에 대해 설명해주세요.
+서블릿의 동작 방식에 대해 설명해주세요.
+싱글톤 빈은 thread-safe한가요?
+spring spring container?
+spring spring container 생성 방법?
+spring DI에 어떤 방식이 있는지 나열하고 설명하시오
